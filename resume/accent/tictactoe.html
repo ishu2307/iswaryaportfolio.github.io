@@ -1,0 +1,158 @@
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        .container {
+            width: 300px;
+            overflow: hidden;
+            margin: 5px auto 0px auto;
+
+        }
+
+        .container span {
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-family: sans-serif;
+            color: white;
+            font-size: 25px;
+            background: #446cb3;
+        }
+
+        .container .box {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            transition: ALL .25S ease-in-out;
+            font-family: sans-serif;
+            font-size: 80pt;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+
+        }
+
+        .container .box:hover {
+            background:cadetblue;
+            color: blue;
+        }
+
+        button {
+            background: tan;
+            color: aliceblue;
+            font-weight: bold;
+            border: 1px sold yellow;
+            cursor: pointer;
+            width: 200px;
+            height: 40px;
+            font-size: 22px;
+            display: block;
+            margin: 10px auto;
+
+        }
+
+        .win {
+            background: rgb(58, 30, 116);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <span id="turn">Play</span>
+        <div class="box" id="box1"></div>
+        <div class="box" id="box2"></div>
+        <div class="box" id="box3"></div>
+        <div class="box" id="box4"></div>
+        <div class="box" id="box5"></div>
+        <div class="box" id="box6"></div>
+        <div class="box" id="box7"></div>
+        <div class="box" id="box8"></div>
+        <div class="box" id="box9"></div>
+
+    </div>
+    <button onclick="replay()">Play Again</button>
+    <script>
+        var turn = document.getElementById("turn");
+        var boxes = document.querySelectorAll("#main div"), x_or_o = 0;
+        function selectwinner(b1, b2, b3) {
+            b1.classList.add("win");
+            b2.classList.add("win");
+            b3.classList.add("win");
+            turn.innerHTML = b1.innerHTML + "won congrts";
+            turn.style.fontSize = "40px";
+        }
+        function winner() {
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var box3 = document.getElementById("box3");
+            var box4 = document.getElementById("box4");
+            var box5 = document.getElementById("box5");
+            var box6 = document.getElementById("box6");
+            var box7 = document.getElementById("box7");
+            var box8 = document.getElementById("box8");
+            var box9 = document.getElementById("box9");
+        }
+        if (box1.innerHTML !== "" && box1.innerHTML === box2.innerHTML && box1.innerHTML === box3.innerHTML) {
+            //console.log("win");
+            selectwinner(box1, box2, box3);
+        }
+        if (box4.innerHTML !== "" && box4.innerHTML === box5.innerHTML && box4.innerHTML === box6.innerHTML) {
+            selectwinner(box4, box5, box6);
+        }
+        if (box7.innerHTML !== "" && box7.innerHTML === box8.innerHTML && box8.innerHTML === box9.innerHTML) {
+            selectwinner(box7, box8, box9);
+        }
+        if (box1.innerHTML !== "" && box1.innerHTML === box4.innerHTML && box1.innerHTML === box7.innerHTML) {
+            selectwinner(box1, box4, box7);
+        }
+        if (box2.innerHTML !== "" && box2.innerHTML === box5.innerHTML && box2.innerHTML === box8.innerHTML) {
+            selectwinner(box2, box5, box8);
+        }
+        if (box3.innerHTML !== "" && box3.innerHTML === box6.innerHTML && box3.innerHTML === box9.innerHTML) {
+            selectwinner(box3, box6, box9);
+        }
+        if (box1.innerHTML !== "" && box1.innerHTML === box5.innerHTML && box1.innerHTML === box9.innerHTML) {
+            selectwinner(box1, box5, box9);
+        }
+        if (box3.innerHTML !== "" && box3.innerHTML === box5.innerHTML && box4.innerHTML === box7.innerHTML) {
+            selectwinner(box3, box5, box7);
+
+        }
+
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].onclick = function () {
+                if (this.innerHTML !== "x" && this.innerHTML !== "o") {
+                    if (x_or_o % 2 === 0) {
+                        console.log(x_or_o);
+                        this.innerHTML = "x";
+                        turn.innerHTML = "o turn now";
+                        //winner();
+                        x_or_o += 1;
+                    }
+                    else {
+
+                        console.log(x_or_o);
+                        this.innerHTML = "o";
+                        turn.innerHTML = "x turn now";
+                        //winner();
+                        x_or_o += 1;
+                    }
+                }
+            };
+        }
+            function replay() {
+                for (var i = 0; i < boxes.length; i++) {
+                    boxes[i].classList.remove("win");
+                    boxes[i].innerHTML = "";
+                    turn.innerHTML = "Play";
+                    turn.style.fontSize = "25px";
+                }
+            }
+    </script>
+</body>

@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <style>
+            #img{
+                height:600px;
+                width:1200px;
+            }
+            </style>
+        <body>
+            <img onmouseover="slide()" onmouseout="stop()" id="img" src="img1.jpg">
+            <script>
+                var myimage=document.getElementById("img");
+                var images=["img1.jpg","img2.jpg","img3.jpg","img4.jpg"];
+                var index=0;
+                var output;
+                function imageslide()
+                {
+                    myimage.setAttribute("src",images[index]);
+                    index++;
+                    if(index>=images.length)
+                    {
+                        index=0;
+                    }
+                }
+                function slide()
+                {
+                    output=setInterval(imageslide,"500");
+                }
+                function stop()
+                {
+                    clearInterval(output);
+                }
+            </script>
+        </body>
+    </head>
+</html>
